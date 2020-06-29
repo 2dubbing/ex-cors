@@ -10,11 +10,7 @@ window.onload = function() {
   
   const button = document.querySelector('.content--image__button__same');
   button.addEventListener('click', () => {
-    fetch(`${MAIN_SERVER_URL}/images`)
-    .then(response => response.json())
-    .then(({ images }) => {
-      setImage(images[0]);
-    });
+    setImage("/images/kakao_tube.png")
   });
 
   const button2 = document.querySelector('.content--image__button__cross');
