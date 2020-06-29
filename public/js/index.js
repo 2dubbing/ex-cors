@@ -23,7 +23,7 @@ window.onload = function() {
       'Content-Type': 'application/json',
     });
 
-    fetch(`${STATIC_SERVER_URL}/images`, { method: 'GET', headers })
+    fetch(`${STATIC_SERVER_URL}/images/`, { method: 'GET', headers })
     .then(response => response.json())
     .then(({ images }) => {
       setImage(images[0]);
