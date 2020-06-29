@@ -4,7 +4,7 @@ const app = express();
 const port = 3001;
 
 // app.use(cors());
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 app.use((req, res, next) => {
   console.log(req.method);
@@ -27,4 +27,4 @@ app.get('/images', (req, res) => {
   res.json({ images: ['/images/kakao_muzi-con.png'] });
 });
 
-app.listen(port, () => console.log(`static-server listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`api-server listening at http://localhost:${port}`));
