@@ -8,9 +8,8 @@ window.onload = function() {
     img.alt = '이미지';
   };
   
-  const textView = document.querySelector('.content--simple-request > p');
-  const setText = (text) => {
-    textView.innerText = text;
+  const setText = ($target, text) => {
+    $target.innerText = text;
   };
 
   const button = document.querySelector('.content--image__button__same');
@@ -29,6 +28,7 @@ window.onload = function() {
     .then(({ images }) => setImage(images[0]));
   });
 
+  const $textView = document.querySelector('.content--simple-request > p');
   const button3 = document.querySelector('.content--simple-request__button');
   button3.addEventListener('click', () => {
     const headers = new Headers({
@@ -37,6 +37,18 @@ window.onload = function() {
 
     fetch(`${API_SERVER_URL}/simple-text`, { method: 'GET', headers })
     .then(response => response.text())
-    .then(text => setText(text));
+    .then(text => setText($textView, text));
+  });
+
+  const $credentialView = document.querySelector('.content--credential-request > p');
+  const button4 = document.querySelector('.content--credential-request__button');
+  button4.addEventListener('click', () => {
+
+    fetch(`${API_SERVER_URL}/credential`, { 
+      method: 'GET', 
+      credentials: 'include',
+    })
+    .then(response => response.json())
+    .then(({ data }) => setText($credentialView, data[0]));
   });
 };
