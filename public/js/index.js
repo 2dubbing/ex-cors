@@ -1,13 +1,18 @@
 const MAIN_SERVER_URL = 'http://localhost:3000';
-const STATIC_SERVER_URL = 'http://localhost:3001';
+const API_SERVER_URL = 'http://localhost:3001';
 
 window.onload = function() {
   const img = document.querySelector('.content--image > img');
   const setImage = (imgSrc) => {
     img.src = imgSrc;
     img.alt = '이미지';
-  }
+  };
   
+  const textView = document.querySelector('.content--simple-request > p');
+  const setText = (text) => {
+    textView.innerText = text;
+  };
+
   const button = document.querySelector('.content--image__button__same');
   button.addEventListener('click', () => {
     setImage("/images/kakao_tube.png")
@@ -19,10 +24,19 @@ window.onload = function() {
       'Content-Type': 'application/json',
     });
 
-    fetch(`${STATIC_SERVER_URL}/images`, { method: 'GET', headers })
+    fetch(`${API_SERVER_URL}/images`, { method: 'GET', headers })
     .then(response => response.json())
-    .then(({ images }) => {
-      setImage(images[0]);
+    .then(({ images }) => setImage(images[0]));
+  });
+
+  const button3 = document.querySelector('.content--simple-request__button');
+  button3.addEventListener('click', () => {
+    const headers = new Headers({
+      'Content-Type': 'text/plain',
     });
-  });  
+
+    fetch(`${API_SERVER_URL}/simple-text`, { method: 'GET', headers })
+    .then(response => response.text())
+    .then(text => setText(text));
+  });
 };
